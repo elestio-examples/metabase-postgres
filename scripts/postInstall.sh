@@ -2,7 +2,7 @@
 set -o allexport; source .env; set +o allexport;
 
 echo "Waiting for Metabase to be ready"
-sleep 30s;
+sleep 60s;
 
 app_target=$(docker-compose port metabase 3000)
 
