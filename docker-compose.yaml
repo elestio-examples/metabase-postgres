@@ -1,0 +1,40 @@
+version: '3.3'
+
+services:
+    db:
+      image: postgres
+      restart: always
+      ports:
+        - 5432:5432
+      environment:
+        - POSTGRES_PASSWORD=${ADMIN_PASSWORD}
+        - POSTGRES_USER=${ADMIN_EMAIL}
+        - POSTGRES_DB=DATABASE
+      volumes:
+        - ./db-data:/var/lib/postgresql/data
+
+    metabase:
+      image: metabase/metabase:${SOFTWARE_VERSION_TAG}
+      restart: always
+      ports:
+        - 172.17.0.1:3033:3000
+      environment:
+        # - MB_DB_FILE=/metabase-data/metabase.db
+        - MB_DB_TYPE=postgres
+        - MB_DB_DBNAME=DATABASE
+        - MB_DB_PORT=5432
+        - MB_DB_USER=${ADMIN_EMAIL}
+        - MB_DB_PASS=${ADMIN_PASSWORD}
+        - MB_DB_HOST=db
+        - MB_SITE_URL=https://[CI_CD_DOMAIN]
+        - MB_EMAIL_FROM_ADDRESS=[DOMAIN]@vm.elestio.app
+        - MB_EMAIL_SMTP_HOST=172.17.0.1
+        - MB_EMAIL_SMTP_PASSWORD=
+        - MB_EMAIL_SMTP_PORT=
+        - MB_EMAIL_SMTP_SECURITY=none
+      volumes:
+      # setup your SQLITE db (optional)
+        # - /metabase-data/metabase.db:/metabase
+        - ./metabase-data:/metabase-data
+      depends_on: 
+        - db
