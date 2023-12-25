@@ -18,6 +18,8 @@ environments:
     value: "random_password"
   - key: "BASE_URL"
     value: "https://[CI_CD_DOMAIN]"      
+  - key: "SMTP_FROM"
+    value: "[DOMAIN]@vm.elestio.app"        
 config:
   runTime: "dockerCompose"
   version: ""
