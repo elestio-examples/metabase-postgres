@@ -27,7 +27,7 @@ services:
         - MB_DB_PASS=${ADMIN_PASSWORD}
         - MB_DB_HOST=db
         - MB_SITE_URL=${BASE_URL}
-        - MB_EMAIL_FROM_ADDRESS=[DOMAIN]@vm.elestio.app
+        - MB_EMAIL_FROM_ADDRESS=${SMTP_FROM}
         - MB_EMAIL_SMTP_HOST=172.17.0.1
         - MB_EMAIL_SMTP_PASSWORD=
         - MB_EMAIL_SMTP_PORT=
