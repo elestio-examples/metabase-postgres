@@ -36,5 +36,6 @@ services:
       # setup your SQLITE db (optional)
         # - /metabase-data/metabase.db:/metabase
         - ./metabase-data:/metabase-data
+        - ./plugins:/plugins
       depends_on: 
         - db
